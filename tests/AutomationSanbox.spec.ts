@@ -16,4 +16,17 @@ test.describe('Interactions with the Automation Sandbox web elements', () => {
             await expect(hiddenElement).toBeVisible();
         })
     })
+
+    test('Writing text in a text field', async ({ page }) => {
+        await test.step('Navigate to FreeRangeTester Automation Sandbox', async () => {
+            await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            await expect(page).toHaveTitle('Automation Sandbox');
+        })
+
+        await test.step('Write text in the text field', async () => {
+            const textField = page.getByPlaceholder('Ingresá texto');
+            await textField.fill('Hello, World!');
+            await expect(textField).toHaveValue('Hello, World!');
+        })
+    })
 });
