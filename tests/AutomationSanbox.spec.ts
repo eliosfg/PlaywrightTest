@@ -29,4 +29,21 @@ test.describe('Interactions with the Automation Sandbox web elements', () => {
             await expect(textField).toHaveValue('Hello, World!');
         })
     })
+
+    test('Selecting checkboxes', async ({ page }) => {
+        await test.step('Navigate to FreeRangeTester Automation Sandbox', async () => {
+            await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            await expect(page).toHaveTitle('Automation Sandbox');
+        })
+
+        await test.step('Select the checkboxes', async () => {
+            const checkbox1 = page.getByLabel('Pizza');
+            const checkbox2 = page.getByLabel('Pasta');
+            await checkbox1.check();
+            await checkbox2.check();
+            await expect(checkbox1).toBeChecked();
+            await expect(checkbox2).toBeChecked();
+        })
+    })
+    
 });
