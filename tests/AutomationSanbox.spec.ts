@@ -46,4 +46,38 @@ test.describe('Interactions with the Automation Sandbox web elements', () => {
         })
     })
     
+    test('Interacting with Radio Buttons', async ({ page }) => {
+        await test.step('Navigate to FreeRangeTester Automation Sandbox', async () => {
+            await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            await expect(page).toHaveTitle('Automation Sandbox');
+        })
+
+        await test.step('Select a radio button', async () => {
+            const radioButton = page.getByLabel('Si');
+            await radioButton.check();
+            await expect(radioButton).toBeChecked();
+        })
+    })
+    
+    test('Dropdowns', async ({ page }) => {
+        await test.step('Navigate to FreeRangeTester Automation Sandbox', async () => {
+            await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+            await expect(page).toHaveTitle('Automation Sandbox');
+        })
+
+        await test.step('Select an option from the dropdown', async () => {
+            const dropdown = page.getByLabel('Dropdown');
+            await dropdown.selectOption('Tennis');
+            await expect(dropdown).toHaveValue('Tennis');
+            await page.getByRole('button', { name: 'Enviar' }).click();
+        })
+
+        await test.step('Select an option from the button dropdown', async () => {
+            const buttonDropdown = page.getByRole('button', { name: 'Día de la semana' });
+            const option = page.getByRole('link', { name: 'Viernes' });
+            await buttonDropdown.click();
+            await page.waitForTimeout(3000);
+            await option.click();
+        })
+    })
 });
